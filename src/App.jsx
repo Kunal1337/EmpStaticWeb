@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+// Configure axios base URL from Vite env (set via GitHub Actions or .env)
+axios.defaults.baseURL = import.meta.env.VITE_API_BASE || '';
+
 
 function App() {
   const [employees, setEmployees] = useState([]);
@@ -15,7 +18,7 @@ function App() {
   useEffect(() => {
     async function fetchEmployees() {
       try {
-  const res = await axios.get('/api/employees');
+  const res = await axios.get('/employees');
         setEmployees(res.data);
       } catch (err) {
         console.error(err);
@@ -31,8 +34,8 @@ function App() {
   const handleSubmit = async e => {
     e.preventDefault();
     try {
-  await axios.post('/api/employees', form);
-  const res = await axios.get('/api/employees');
+  await axios.post('/employees', form);
+  const res = await axios.get('/employees');
       setEmployees(res.data);
       setForm({ first_name: '', last_name: '', email: '', birthdate: '', salary: '' });
     } catch (err) {
