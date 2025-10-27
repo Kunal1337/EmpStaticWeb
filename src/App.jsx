@@ -15,7 +15,7 @@ function App() {
   useEffect(() => {
     async function fetchEmployees() {
       try {
-        const res = await axios.get('http://localhost:4000/employees');
+  const res = await axios.get('/api/employees');
         setEmployees(res.data);
       } catch (err) {
         console.error(err);
@@ -31,8 +31,8 @@ function App() {
   const handleSubmit = async e => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:4000/employees', form);
-      const res = await axios.get('http://localhost:4000/employees');
+  await axios.post('/api/employees', form);
+  const res = await axios.get('/api/employees');
       setEmployees(res.data);
       setForm({ first_name: '', last_name: '', email: '', birthdate: '', salary: '' });
     } catch (err) {
